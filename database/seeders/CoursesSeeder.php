@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\User;
 use App\Models\Course;
+use App\Models\Category;
 use Cocur\Slugify\Slugify;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,8 +16,6 @@ class CoursesSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        
         
         // $slugify = new Slugify();
         $titre = ['Mon titre', 'Mon titre 2', 'Mon titre 3', 'Mon titre 4', 'Mon titre 5', 'Mon titre 6', 'Mon titre 7', 'Mon titre 8', 'Mon titre 9', 'Mon titre 10'];
@@ -30,7 +29,8 @@ class CoursesSeeder extends Seeder
 
             $course = new Course();
             $category_id = Category::all()->random(1)->first()->id;
-
+            $user_id = User::all()->random(1)->first()->id;
+            // dd($user_id);
             $course->title = $titre[$i];
             $course->subtitle =  $sousTitre[$i];
             // $course->slug = 'mon-slug';
@@ -40,6 +40,7 @@ class CoursesSeeder extends Seeder
             $course->description = $description[$i];
             $course->price = $prix[$i];
             $course->category_id = $category_id;
+            $course->user_id = $user_id;
             $course->save();
         }       
 

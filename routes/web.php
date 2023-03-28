@@ -24,3 +24,5 @@ Auth::routes();
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/instructor/overview', [App\Http\Controllers\InstructorController::class, 'index'])->name('instructor');
