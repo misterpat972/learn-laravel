@@ -43,8 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+// function courses est une relation inverse de hasMany() dans la classe Course 
     public function courses()
-    {
+    {   
         return $this->hasMany(Course::class);
     }
 }

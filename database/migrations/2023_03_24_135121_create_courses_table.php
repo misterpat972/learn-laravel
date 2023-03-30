@@ -15,7 +15,10 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            // user id est une clé étrangère qui fait référence à la clé primaire de la table users
             $table->integer('user_id');
+            // image est une chaine de caractère qui contient le nom de l'image qui sera stockée dans le dossier public/images
+            $table->string('image');
             $table->string('subtitle');
             $table->string('slug');
             $table->text('description');

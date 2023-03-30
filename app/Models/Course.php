@@ -15,8 +15,9 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-
+// function user est une relation inverse de hasMany() dans la classe User
     public function user(){
+        // belongsTo() est une reletion qui permet de faire une relation inverse de hasMany() dans la classe User
         return $this->belongsTo(User::class);
     }
 }

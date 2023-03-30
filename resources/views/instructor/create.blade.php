@@ -6,7 +6,8 @@
     <div class="container">
         <div class="d-flex justify-content-center">
             <div class="col-lg-8">
-                <form action="#" class="comment-form contact-form" method="POST" enctype="multipart/form-data">
+                <form action=" {{ route('instructor.store')}}" class="comment-form contact-form" method="POST" enctype="multipart/form-data">
+                    @csrf 
                     <div class="row">
                         <div class="col-lg-12">
                             <label for="title">Titre du cours</label>
@@ -21,8 +22,15 @@
                             <textarea type="textarea" placeholder="Qu'allez vous enseigner durant ce cours ? Avec quelles compétences les apprenants repartiront ?" name="description"></textarea>
                         </div>
                         <div class="col-lg-12">
+                            {{-- selection des catégories --}}
                             <select class="form-control" name="category">
-                                <option value="cat">Catégorie</option>
+                                @foreach ($categories as $category)
+                                {{-- ici on boucle sur les catégories et on select l'id et le nom de la catégorie --}}
+                                <option value="{{ $category->id  }}">{{ $category->name }}</option>
+                                @endforeach
+
+
+                               
                             </select>
                         </div>
                         <div class="col-lg-12 mt-3">
