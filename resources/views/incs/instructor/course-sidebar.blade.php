@@ -15,10 +15,16 @@
         <h4 class="btn text-white pl-0">Gestion du cours</h4>
         <ul class="list-unstyled components mb-5">
             <li>
-                <a href="#">Tarification</a>
+                <a href=" {{route('instructor.pricing', $course->id )}} ">Tarification</a>
             </li>
             <li>
             <a href="#">Participants</a>
+            </li>
+            <li>
+            <a class="btn btn-danger text-left px-3" href=" {{ route('instructor.destroy',  $course->id)}} ">                             
+                <i class="fas fa-trash-alt"></i>
+                Supprimer le cours
+            </a>
             </li>
         </ul>
         <div class="d-flex justify-content-around">

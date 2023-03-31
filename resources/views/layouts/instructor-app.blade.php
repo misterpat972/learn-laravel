@@ -20,16 +20,19 @@
     <title>Learning</title>
   </head>
   <body>
-    <div class="wrapper d-flex align-items-stretch text-left">
+    <div class="wrapper d-flex align-items-stretch text-left">      
       @include('incs.instructor.course-sidebar')
-       
-        <!-- Page Content  -->
-        <div id="content" class="p-4 p-md-5">
-          @if (Request::is('instructor/*'))
+      <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+        @if (Request::is('instructor/*'))
               @include('incs.instructor.header')
           @else
               @include('incs.header')
           @endif
+
+          <div class="container">
+            @include('incs.messages')
+          </div>
           
           @yield('content')
         </div>

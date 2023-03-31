@@ -27,6 +27,7 @@
       @else
         @include('incs.header')
       @endif
+      {{-- inclusion des messages alert (inc/message.blade.php) --}}
       <div class="container">
         @include('incs.messages')
       </div>
@@ -46,5 +47,6 @@
     <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script> 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/message.alert.js') }}"></script>
   </body>
 </html>
