@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="section-title">
                     <h2>Programme</h2>
-                    <p>Titre du cours</p>
+                    <p>{{ $course->title }}</p>
                 </div>
             </div>
         </div>
@@ -17,25 +17,29 @@
                 <div class="schedule-tab">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                        {{-- si le cours à des section alors on affiche --}}
+                          @if ( $course->sections->count() > 0 )
                             <div class="text-center mb-5">
-                                <a class="primary-btn" href="#">
+                                <a class="primary-btn" href="{{ route('instructor.curriculum.create', $course->id ) }}">
                                     <i class="fas fa-plus mr-2"></i>
                                     Ajouter une section
                                 </a>
                             </div>
+                            @foreach ($course->sections as $section)                                             
                                 <div class="st-content">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-4 px3 py-3">
-                                                <iframe width="320" height="180"
-                                                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                                </iframe>
+                                                <video src="" width="300" height="180" controls>
+                                                    <source src=" {{ asset('storage/courses_section/'. $course->user_id . '/' . $section->video ) }} ">
+                                                        
+                                                </video>
                                             </div>
                                             <div class="col-lg-4 text-left">
                                                 <div class="sc-text">
-                                                    <h4>Nom de la section</h4>
+                                                    <h4> {{ $section->title }} </h4>
                                                 </div>
-                                                <p>Durée de la section : 00.50</p>
+                                                <p>Durée de la section : {{ $section->playtime_seconds }}</p>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="sc-text d-flex justify-content-around">
@@ -51,8 +55,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>                                    
+                                @endforeach                               
+                              @else
+                              {{-- si on a pas encore de section alors on ajoute --}}
+                                <div class="text-center">
+                                    <a href=" {{ route('instructor.curriculum.create', $course->id ) }}" class="primary-btn">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        Ajouter une section
+                                    </a>
                                 </div>
-                        </div>
+                                @endif
+                            </div>
                     </div>
                 </div>
             </div>

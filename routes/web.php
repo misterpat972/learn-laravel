@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CurriculumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ Route::put('/instructor/courses/update/{id}', [App\Http\Controllers\InstructorCo
 // route pour la suppression d'un cours par l'instructeur
 Route::get('/instructor/courses/delete/{id}', [App\Http\Controllers\InstructorController::class, 'destroy'])->name('instructor.destroy');
 // route pour le prix d'un cours par l'instructeur 
-Route::get('instructor/courses/pricing/{id}', [App\Http\Controllers\pricingController::class, 'pricing'])->name('instructor.pricing');
+Route::get('/instructor/courses/pricing/{id}', [App\Http\Controllers\pricingController::class, 'pricing'])->name('instructor.pricing');
 // route pour la mise a jour du prix d'un cours par l'instructeur
-Route::post('instructor/courses/pricing/store/{id}', [App\Http\Controllers\pricingController::class, 'pricingStore'])->name('instructor.pricing.store');
+Route::post('/instructor/courses/pricing/store/{id}', [App\Http\Controllers\pricingController::class, 'pricingStore'])->name('instructor.pricing.store');
+// route pour l'affichage du curriculum d'un cours par l'instructeur
+Route::get('/instructor/courses/curriculum/{id}', [CurriculumController::class, 'index'])->name('instructor.curriculum');
+// route pour l'affichage du formulaire de creation d'une section dans le curriculum d'un cours par l'instructeur
+Route::get('/instructor/courses/curriculum/section/create/{id}', [CurriculumController::class, 'create'])->name('instructor.curriculum.create');
+// route pour la creation d'une section dans le curriculum d'un cours par l'instructeur
+Route::post('/instructor/courses/curriculum/section/store/{id}', [CurriculumController::class, 'store'])->name('instructor.curriculum.store');
