@@ -82,24 +82,51 @@ class CurriculumController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(string $section_id, string $id)
+    {  
+        $course = Course::find($id);        
+        $section = Section::find($section_id);
+       
+        return view('instructor.curriculum.edit', [
+            'course' => $course,
+            'section' => $section
+        ]);
     }
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, string $section_id, string $id)
+    {  
+        $course = Course::find($id);
+        $section = Section::find($section_id);
+        $slug = new Slugify();
+
+        $section->title = $request->section_name;
+        $section->slug = $slug->slugify($request->section_name);
+        $section->course_id = $course->id;
+        $section->save();
+        return redirect()->route('instructor.curriculum', $course->id)->with('success', 'Section modifiée avec succès');
+
+       
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $section_id, string $id)
+    {   
+        $course = Course::find($id);
+        $section = Section::find($section_id);
+        $fileToDelete = 'public/courses_section/'.Auth::user()->id.'/'.$section->video;
+        // on supprime la video de la section dans le dossier storage/app/public/courses_section/{id de l'utilisateur} 
+        if (file_exists(storage_path('app/'.$fileToDelete))) {
+            unlink(storage_path('app/'.$fileToDelete));
+        }
+        // on supprime la section dans la base de données
+        $section->delete();
+        return redirect()->route('instructor.curriculum', $course->id)->with('success', 'Section supprimée avec succès');
     }
+   
 }
