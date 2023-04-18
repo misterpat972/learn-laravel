@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="bh-text">
-                    <h2>Titre du cours</h2>
+                    <h2>{{ $course->title }}</h2>
                     <ul>
-                        <li><span>Par <strong>Nom du formateur</strong></span></li>
-                        <li>20/03/2020</li>
+                        <li><span>Par <strong>{{ $course->user->name }}</strong></span></li>
+                        <li>{{ $course->created_at->format('j-M-y') }}</li>
                         <li>Mis à jour le 22/03/2020</li>
                     </ul>
                 </div>

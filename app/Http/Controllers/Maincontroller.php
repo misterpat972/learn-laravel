@@ -12,7 +12,7 @@ class Maincontroller extends Controller
     { 
         // dd(Course::where('id', 11)->firstOrFail());
        
-        // dd(Category::where('id', 3)->firstOrFail()->courses);
+        Category::where('id', 3)->firstOrFail();
         return view('main.home');
     }
 }
