@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('description');
             $table->float('price')->nullable();
             $table->integer('category_id');
+            $table->boolean('published')->default(false);
             $table->timestamps();
         });
     }

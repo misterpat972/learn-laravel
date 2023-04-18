@@ -160,5 +160,22 @@ class InstructorController extends Controller
         // ici je redirige vers la route instructor.index avec la méthode route() de la classe Illuminate\Support\Facades\Redirect et je stocke un message de succes dans la session avec la methode with() de la classe Illuminate\Support\Facades\Redirect
         return redirect()->route('instructor')->with('success', 'Le cours a été supprimé avec succès');
     }
+
+    public function publish(string $id)
+    {
+        // ici on a utilise la methode find() de la classe App\Models\Course pour recuperer le cours dont l'id est egal a $id
+        $course = Course::find($id);
+        
+        if($course->price && $course->sections->count() > 0){
+            $course->published = true;
+            $course->save();
+            // ici je redirige vers la route instructor.index avec la méthode route() de la classe Illuminate\Support\Facades\Redirect et je stocke un message de succes dans la session avec la methode with() de la classe Illuminate\Support\Facades\Redirect
+            return redirect()->back()->with('success', 'Le cours a été publié avec succès');
+        }else{
+            // ici je redirige vers la route instructor.index avec la méthode route() de la classe Illuminate\Support\Facades\Redirect et je stocke un message d'erreur dans la session avec la methode with() de la classe Illuminate\Support\Facades\Redirect
+            return redirect()->back()->with('error', 'Votre cours doit avoir au moins un prix pour être publié, ainsi qu\'une section');
+        }
+    }
+
    
 }
